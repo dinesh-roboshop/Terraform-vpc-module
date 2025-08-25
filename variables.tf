@@ -12,17 +12,18 @@ variable "project_name" {
 variable "environment" {
   type        = string
 }
+
 variable "vpc_tags" {
   type        = map 
   default = {
-    resource = vpc
+    resource = "vpc"
   }
 }
 
 variable "igw_tags" {
   type        = map 
   default = {
-    resource = igw
+    resource = "igw"
   }
 }
 variable "common_tags" {
