@@ -35,3 +35,29 @@ variable "common_tags" {
   
   }
 }
+
+variable "public_subnet_cidr" {
+  type        = list 
+  validation {
+    condition = length(var.public_subnet_cidr) == 2
+    error_message = "Please input only 2 public subnet CIDRs"
+
+  }
+}
+
+variable "public_subnet_tags" {
+  default     = {}
+}
+
+variable "private_subnet_cidr" {
+  type        = list 
+  validation {
+    condition = length(var.private_subnet_cidr) == 2
+    error_message = "Please input only 2 private subnet CIDRs"
+
+  }
+}
+
+variable "private_subnet_tags" {
+  default     = {}
+}

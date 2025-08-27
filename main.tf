@@ -22,3 +22,35 @@ resource "aws_internet_gateway" "igw" {
     }
   )
 }
+
+resource "aws_subnet" "public_subnet" {
+  vpc_id     = aws_vpc.my-vpc.id
+  count = length(var.public_subnet_cidr)
+  cidr_block = var.public_subnet_cidr[count.index]
+  availability_zone = local.azs[count.index]
+  tags = merge(
+    var.common_tags,
+    var.public_subnet_tags,
+    {
+     Name = "${local.name}-public-${local.azs[count.index]}"
+
+    }
+
+  )
+}
+
+resource "aws_subnet" "private_subnet" {
+  vpc_id     = aws_vpc.my-vpc.id
+  count = length(var.private_subnet_cidr)
+  cidr_block = var.private_subnet_cidr[count.index]
+  availability_zone = local.azs[count.index]
+  tags = merge(
+    var.common_tags,
+    var.private_subnet_tags,
+    {
+     Name = "${local.name}-private-${local.azs[count.index]}"
+
+    }
+
+  )
+}
