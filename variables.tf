@@ -74,3 +74,7 @@ variable "database_subnet_cidr" {
 variable "database_subnet_tags" {
   default     = {}
 }
+
+variable "natgw_tags" {
+  default     = ""
+}
