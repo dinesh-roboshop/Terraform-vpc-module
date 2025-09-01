@@ -76,5 +76,5 @@ variable "database_subnet_tags" {
 }
 
 variable "natgw_tags" {
-  default     = ""
+  default     = {}
 }
