@@ -77,7 +77,7 @@ resource "aws_eip" "eip" {
 
 resource "aws_nat_gateway" "natgw" {
   allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.public_subnet.[0].id
+  subnet_id     = aws_subnet.public_subnet[0].id
   tags = merge(
     var.common_tags,
     var.natgw_tags,
