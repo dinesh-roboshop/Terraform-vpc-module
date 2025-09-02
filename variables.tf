@@ -78,3 +78,14 @@ variable "database_subnet_tags" {
 variable "natgw_tags" {
   default     = {}
 }
+variable "database_rt_tags" {
+ default = {}
+}
+
+variable "private_rt_tags" {
+ default = {}
+}
+
+variable "public_rt_tags" {
+ default = {}
+}

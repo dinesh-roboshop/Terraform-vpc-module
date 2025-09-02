@@ -93,3 +93,63 @@ resource "aws_nat_gateway" "natgw" {
   depends_on = [aws_internet_gateway.igw]
 }
 
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.my-vpc.id
+
+tags = merge(
+    var.common_tags,
+    var.public_rt_tags,
+    {
+     Name = "${local.name}-public"
+
+    }
+
+  )
+}
+
+resource "aws_route_table" "private_rt" {
+  vpc_id = aws_vpc.my-vpc.id
+
+tags = merge(
+    var.common_tags,
+    var.private_rt_tags,
+    {
+     Name = "${local.name}-private"
+
+    }
+
+  )
+}
+
+resource "aws_route_table" "database_rt" {
+  vpc_id = aws_vpc.my-vpc.id
+
+tags = merge(
+    var.common_tags,
+    var.database_rt_tags,
+    {
+     Name = "${local.name}-database"
+
+    }
+
+  )
+}
+
+resource "aws_route" "public_route" {
+  route_table_id            = aws_route_table.public_rt.id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw.id
+}
+
+resource "aws_route" "private_route" {
+  route_table_id            = aws_route_table.private_rt.id
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id  = aws_nat_gateway.natgw.id
+}
+
+resource "aws_route" "database_route" {
+  route_table_id            = aws_route_table.database_rt.id
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id  = aws_nat_gateway.natgw.id
+}
+
