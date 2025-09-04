@@ -89,3 +89,19 @@ variable "private_rt_tags" {
 variable "public_rt_tags" {
  default = {}
 }
+
+
+variable "is_peering_required" {
+  type        = bool
+  default     = "false"
+}
+
+variable "vpcpeering_tags" {
+  default     = {}
+}
+
+variable "accepter_vpc_id" {
+  type        = string
+  default     = ""
+}
+
