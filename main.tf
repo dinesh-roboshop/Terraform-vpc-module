@@ -12,7 +12,7 @@ resource "aws_vpc" "my_vpc" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.my-vpc.id
+  vpc_id = aws_vpc.my_vpc.id
 
   tags = merge(
     var.common_tags, 
@@ -24,7 +24,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.my-vpc.id
+  vpc_id     = aws_vpc.my_vpc.id
   count = length(var.public_subnet_cidr)
   cidr_block = var.public_subnet_cidr[count.index]
   availability_zone = local.azs[count.index]
@@ -40,7 +40,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id     = aws_vpc.my-vpc.id
+  vpc_id     = aws_vpc.my_vpc.id
   count = length(var.private_subnet_cidr)
   cidr_block = var.private_subnet_cidr[count.index]
   availability_zone = local.azs[count.index]
@@ -56,7 +56,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_subnet" "database_subnet" {
-  vpc_id     = aws_vpc.my-vpc.id
+  vpc_id     = aws_vpc.my_vpc.id
   count = length(var.database_subnet_cidr)
   cidr_block = var.database_subnet_cidr[count.index]
   availability_zone = local.azs[count.index]
@@ -94,7 +94,7 @@ resource "aws_nat_gateway" "natgw" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.my-vpc.id
+  vpc_id = aws_vpc.my_vpc.id
 
 tags = merge(
     var.common_tags,
@@ -108,7 +108,7 @@ tags = merge(
 }
 
 resource "aws_route_table" "private_rt" {
-  vpc_id = aws_vpc.my-vpc.id
+  vpc_id = aws_vpc.my_vpc.id
 
 tags = merge(
     var.common_tags,
@@ -122,7 +122,7 @@ tags = merge(
 }
 
 resource "aws_route_table" "database_rt" {
-  vpc_id = aws_vpc.my-vpc.id
+  vpc_id = aws_vpc.my_vpc.id
 
 tags = merge(
     var.common_tags,
